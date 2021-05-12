@@ -19,19 +19,19 @@ const produtos = [
     id: 1,
     nome: 'Tênis Nike Lebron Witness V',
     preco: 351,
-    foto: { foto1 }
+    foto: foto1 
   },
   {
     id: 2,
     nome: 'Tênis Nike Fly.By Mid 2',
     preco: 275,
-    foto: { foto2 }
+    foto: foto2
   },
   {
     id: 1,
     nome: 'Tênis Nike Lebron Witness V',
     preco: 231,
-    foto: { foto3 }
+    foto: foto3
   }
 ]
 

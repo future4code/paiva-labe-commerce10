@@ -7,7 +7,6 @@ const Item = styled.div`
   display: flex;
   flex-direction: column;
   img {
-
   }
 `
 const InfoProduto = styled.div`
