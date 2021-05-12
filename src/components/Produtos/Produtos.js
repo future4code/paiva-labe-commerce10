@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListaProdutos } from './ListaProdutos'
-import Styled from 'styled-components'
+import styled from 'styled-components'
 
 const ContainerProdutos = styled.div`
   
