@@ -1,7 +1,7 @@
 import React from 'react';
-import { Filtros } from './components/Filtros/Filtros';
-import { Produtos } from './components/Produtos/Produtos'
-import { Carrinho } from './components/Carrinho/Carrinho';
+import Filtros from './components/Filtros/Filtros';
+import Produtos from './components/Produtos/Produtos'
+import Carrinho from './components/Carrinho/Carrinho';
 import foto1 from './assets/image1.png'
 import foto2 from './assets/image2.png'
 import foto3 from './assets/image3.png'

@@ -23,7 +23,7 @@ const AdicionaProduto = styled.button`
   cursor: pointer;
 `
 
-export class ListaProdutos extends React.Component {
+export default class ListaProdutos extends React.Component {
   render() {
     const produto = this.props.produto
     return (

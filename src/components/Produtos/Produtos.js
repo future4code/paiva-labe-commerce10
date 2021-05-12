@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListaProdutos } from './ListaProdutos'
+import ListaProdutos from './ListaProdutos'
 import styled from 'styled-components'
 
 const ContainerProdutos = styled.div`
@@ -17,7 +17,7 @@ const OrganizaProdutos = styled.div`
   padding: 1rem;
   `
 
-export class Produtos extends React.Component {
+export default class Produtos extends React.Component {
   state = {
     ordenar: 'decrescente'
   }

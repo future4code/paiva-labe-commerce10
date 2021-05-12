@@ -15,7 +15,7 @@ color: #ddeeff;
 padding: 1vw;
 `
 
-export class Filtros extends React.Component {
+export default class Filtros extends React.Component {
 
 componentDidUpdate () {
 }
@@ -53,5 +53,3 @@ onClickBuscar = () => {
 )
 }
 }
-
-export default Filtros;
