@@ -3,10 +3,11 @@ import styled from 'styled-components'
 
 const Item = styled.div`
   border: 1px solid;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   img {
-    
+
   }
 `
 const InfoProduto = styled.div`
