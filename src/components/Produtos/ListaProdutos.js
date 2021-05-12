@@ -28,10 +28,10 @@ export class ListaProdutos extends React.Component {
   render() {
     return (
       <Item>
-        <img src={} alt={} />
+        <img src={produto.foto} alt={} />
         <InfoProduto>
-          <p>{NOME DO PRODUTO}</p>
-          <p>{PREÇO DO PRODUTO}</p>
+          <p>{produto.nome}</p>
+          <p>{produto.preco}</p>
         </InfoProduto>
         <AdicionaProduto onClick={() => this.props.addProdutoAoCarrinho(produto.id)}>
           Comprar
