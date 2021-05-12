@@ -1,7 +1,7 @@
 import React from "react";
 import {CarrinhoArea,CarrinhoButton,CarrinhoProduto,CarrinhoTexto} from './styled'
 
-export class Carrinho extends React.Component{
+export default class Carrinho extends React.Component{
     render(){
         return(
             <CarrinhoArea>
