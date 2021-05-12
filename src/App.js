@@ -24,6 +24,12 @@ const produtos = [
     nome: 'Tênis Nike Fly.By Mid 2',
     preco: 275,
     foto: { foto2 }
+  },
+  {
+    id: 1,
+    nome: 'Tênis Nike Lebron Witness V',
+    preco: 231,
+    foto: { foto3 }
   }
 ]
 
