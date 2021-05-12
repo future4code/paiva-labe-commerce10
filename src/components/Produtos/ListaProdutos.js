@@ -22,7 +22,6 @@ const InfoProduto = styled.div`
 const AdicionaProduto = styled.button`
   border: none;
   cursor: pointer;
-
 `
 
 export class ListaProdutos extends React.Component {

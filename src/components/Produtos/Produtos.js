@@ -16,7 +16,8 @@ const OrganizaProdutos = styled.div`
   gap: 1rem;
   padding: 1rem;
   `
-export class Produtos extends React.Component {
+
+export default class Produtos extends React.Component {
   state = {
     ordenar: 'decrescente'
   }
