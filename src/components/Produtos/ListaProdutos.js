@@ -21,17 +21,18 @@ const InfoProduto = styled.div`
 
 const AdicionaProduto = styled.button`
   border: none;
-
+  cursor: pointer;
 `
 
 export class ListaProdutos extends React.Component {
   render() {
+    const produto = this.props.produto
     return (
       <Item>
-        <img src={produto.foto} alt={} />
+        <img src={produto.foto} />
         <InfoProduto>
           <p>{produto.nome}</p>
-          <p>{produto.preco}</p>
+          <p>R${produto.preco},00</p>
         </InfoProduto>
         <AdicionaProduto onClick={() => this.props.addProdutoAoCarrinho(produto.id)}>
           Comprar
