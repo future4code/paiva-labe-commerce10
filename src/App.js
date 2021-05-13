@@ -55,41 +55,52 @@ export default class App extends React.Component {
     teste: ""
   }
 
-   verificarCompra = (id) => {
-
-
-
+  componentDidUpdate () {
+    console.log(this.state.produtosCarrinho)
   }
+
+  apagarProduto = (idProduto) => {
+    const novoCarrinho = [...this.state.produtosCarrinho]
+
+    const carrinhoFiltrado = novoCarrinho.filter((carrinho)=> {
+      return carrinho.id !==idProduto
+    })
+
+    this.setState({produtosCarrinho: carrinhoFiltrado})
+}
 
   addProdutoAoCarrinho = (idProduto) => {
     
-    let qntdCompra = 0
     let noCarrinho = false
 
     const compraMais = this.state.produtosCarrinho.map((carrinho) => {
       if(carrinho.id === idProduto){
-        noCarrinho = true
-        const aumentarQntd = {...carrinho,qntdCompra: carrinho.qntdCompra + 1}
-        console.log(carrinho.qntdCompra)
-        return(aumentarQntd)
+        noCarrinho = true // True caso produto esteja no carrinho
+        const aumentarQntd = {...carrinho,qntdCompra: carrinho.qntdCompra} //Aumenta a quantidade no carrinho em 1
+        console.log('dentro de if carrinho',carrinho) 
+        return aumentarQntd
+      }else{
+        alert("Não encontrado")
       }
     })
-
     if(noCarrinho){
       this.setState({produtosCarrinho: compraMais})
-      console.log(this.state.produtosCarrinho)
+      console.log('if no carrinho', compraMais)
     }else{
 
-      const selecionarProduto = produtos.map((produto) =>{
-        if(produto.id === idProduto){
-            produto = {...produto, qntdCompra: 1}
-            this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})
-          }
-          
-        })
+        const selecionarProduto = produtos.map((produto) =>{
+          if(produto.id === idProduto){
+              produto = {...produto, qntdCompra: 1}
+              console.log(produto)
+              this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})
+       
+            }
+            
+          })
+      }
+      console.log('novo produto', this.state.produtosCarrinho)
       }
 
-      }
 
   render() {
 
@@ -102,6 +113,7 @@ export default class App extends React.Component {
       />
         <Carrinho
         carrinhoCompra = {this.state.produtosCarrinho}
+        apagarProduto = {this.apagarProduto}
         />
         
       </ContainerAplicacao>
