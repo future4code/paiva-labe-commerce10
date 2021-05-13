@@ -1,55 +1,81 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import ListaProdutos from ../Produtos/ListaProdutos
+import styled from 'styled-components'
 
 
-const CorpoFiltros = styled.div`
+const FiltrosContainer = styled.div`
 display: flex;
-flex-flow: column wrap;
-border: 1px solid black;
-width: 25vw;
-height: 95vh;
-padding-left: 10px;
-padding-right: 10px;
-background-color: #001020;
-color: #ddeeff;
-padding: 1vw;
+flex-direction: column;
+grid-column: 1/2;
 `
 
-export default class Filtros extends React.Component {
-
-componentDidUpdate () {
-}
-
-onChangeInputMaximo () {
-    console.log('funciona')
-}
 
 
-onClickBuscar = () => {
-    console.log('buscou')
-}
+class Filtros extends React.Component {
+    state = {
+        minimo: '',
+        maximo: '',
+        buscaProduto: '',
+        compras: [],
+    }
 
+    onChangeMinimo = (event) => {
+        this.setState({ minimo: event.target.value })
+    }
 
+    onChangeMaximo = (event) => {
+        this.setState({ maximo: event.target.value })
+    }
 
+    onChangeBusca = (event) => {
+        this.setState({ buscaProduto: event.target.value })
+    }
 
+    onClickComprar = (produto) => {                    // TALVEZ ALGUÉM QUEIRA USAR ESTA FUNÇÃO
+        console.log('clicou', produto)                 // QUEM ESTÁ FAZENDO O CARRINHO, PEGUE A LISTA
+        this.state.compras.push(produto)               // DE COMPRAS NO ESTADO, CASO QUEIRA.
+     }
+//-----------------------------------------------------------
+    componentDidUpdate() {
+        console.log('update')
+    }
 
-    render () {
+  
+    render() {
+    //
+        const produtos = this.props.produtos
+        const inputMinusculo = this.state.buscaProduto.toLowerCase()
+
+       
+        const buscaNome = produtos.filter(produto => {
+            let produtoNome = produto.nome.toLowerCase()
+            return produtoNome.search(inputMinusculo) !== -1
+        })
+
+        const filtro = buscaNome.filter(produto => {
+            if (((produto.value >= this.state.minimo) && (produto.value <= this.state.maximo)) ||
+                ((produto.value >= this.state.minimo) && (this.state.maximo === '')) ||
+                ((this.state.minimo === '') && (this.state.maximo === ''))) {
+                return produto
+            }
+        })
+
         return (
-    <CorpoFiltros>          
-        <h1>Filtros</h1><br /><br />
-            
-        <p>Valor Máximo</p>
-        <input type="number" 
-            onChange={this.props.onChangeInputMaximo} /><br/>
 
-        <p>Valor Mínimo</p>
-        <input type="number" 
-            onChange={this.props.onChangeInputMinimo}/><br />
+                <FiltrosContainer>
+                    <h2>Filtros</h2>
+                    <label>Valor Mínimo</label>
+                    <input type='Number' value={this.state.minimo} onChange={this.onChangeMinimo}></input>
+                    <label>Valor Máximo</label>
+                    <input type='Number' value={this.state.maximo} onChange={this.onChangeMaximo}></input>
+                    <label>Buscar Produto</label>
+                    <input value={this.state.buscaProduto} onChange={this.onChangeBusca}></input>
+                </FiltrosContainer>
+                
+                <ListaProdutos estadosFiltro={state} produtos={produtos}/>  // EsTADOS E PRODUTOS PARA 
+              									//ListaProduto
+        )
+    }
+}
 
-        <p>Buscar Produto</p>
-        <input type="text" />
-        <button onClick={this.onClickBuscar}>Buscar</button>
-    </CorpoFiltros>
-)
-}
-}
+export default Filtros;
