@@ -55,8 +55,49 @@ export default class App extends React.Component {
     teste: ""
   }
 
+   verificarCompra = (id) => {
+
+
+
+  }
+
   addProdutoAoCarrinho = (idProduto) => {
-    console.log(idProduto)
+    
+    let qntdCompra = 0
+    let noCarrinho = false
+
+    const compraMais = this.state.produtosCarrinho.map((carrinho) => {
+      if(carrinho.idProduto === idProduto){
+        noCarrinho = true
+        const aumentarQntd = {...carrinho,qntdCompra: carrinho.qntdCompra + 1}
+        console.log(carrinho.qntdCompra)
+        return(aumentarQntd)
+      }
+    })
+
+    if(noCarrinho){
+      this.setState({produtosCarrinho: compraMais})
+      console.log(this.state.produtosCarrinho)
+    }else{
+
+      const selecionarProduto = produtos.map((produto) =>{
+        if(produto.id === idProduto){
+          const novoProdutoCarrinho = {
+            idProduto: produto.id,
+            nomeProduto: produto.nome,
+            valorProduto: produto.preco,
+            qntdCompra:  1
+          
+          }
+          return(novoProdutoCarrinho)
+          console.log(novoProdutoCarrinho)
+        }
+
+        this.setState({produtosCarrinho: [...this.state.produtosCarrinho,selecionarProduto]})
+        console.log(this.state.produtosCarrinho)
+      })
+
+    }
   }
 
   render() {
