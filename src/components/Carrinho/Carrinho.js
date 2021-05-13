@@ -3,28 +3,41 @@ import {CarrinhoArea,CarrinhoButton,CarrinhoProduto,CarrinhoTexto} from './style
 
 export default class Carrinho extends React.Component{
 
+    state = {
+        x:0
+    }
+
     
     duplicarValor = () =>{
 
     }
 
-    valorTotal = () => {
+    
 
-    }
+
+
 
     apagarProduto = () => {
+        const x2 = this.state.x
         const cart = this.props.carrinhoCompra
         console.log(cart)
+        this.setState({x:1})
+        console.log(x2)
     }
 
     render(){
+        const valorTotal = (qntd,valor) => {
+            const carrinhoTotal = qntd * valor
+            return  carrinhoTotal
+        }
 
         const carrinho = this.props.carrinhoCompra.map((cart,index)=>{
+            
             return(
                 <CarrinhoProduto>
                     <CarrinhoTexto>{cart.qntdCompra}x</CarrinhoTexto>
                     <CarrinhoTexto>{cart.nomeProduto}</CarrinhoTexto>
-                    <CarrinhoTexto>R${cart.valorProduto}</CarrinhoTexto>
+                    <CarrinhoTexto>{cart.valorProduto}</CarrinhoTexto>
                     <CarrinhoButton onClick = {this.apagarProduto}>
                         Apagar Produto
                     </CarrinhoButton>
@@ -36,7 +49,7 @@ export default class Carrinho extends React.Component{
             return(
                 <CarrinhoArea>
                     {carrinho}
-                    <CarrinhoTexto>Total total: {this.valorTotal}</CarrinhoTexto>
+                    <CarrinhoTexto>Total total: R$</CarrinhoTexto>
 
                 </CarrinhoArea>            
             )            

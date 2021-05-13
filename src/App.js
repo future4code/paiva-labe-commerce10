@@ -28,7 +28,7 @@ const produtos = [
     foto: foto2
   },
   {
-    id: 1,
+    id: 3,
     nome: 'Tênis Nike Lebron Witness V',
     preco: 231,
     foto: foto3
@@ -50,7 +50,9 @@ export default class App extends React.Component {
     qntdCompra: 2,
 
   }
-    ]
+    ],
+
+    teste: ""
   }
 
   addProdutoAoCarrinho = (idProduto) => {
@@ -58,11 +60,13 @@ export default class App extends React.Component {
   }
 
   render() {
+
     return (
       <ContainerAplicacao>
         <Filtros />
         <Produtos 
       produtos={produtos}
+      addProdutoAoCarrinho = {this.addProdutoAoCarrinho}
       />
         <Carrinho
         carrinhoCompra = {this.state.produtosCarrinho}
