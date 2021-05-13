@@ -36,8 +36,8 @@ export default class Carrinho extends React.Component{
             return(
                 <CarrinhoProduto>
                     <CarrinhoTexto>{cart.qntdCompra}x</CarrinhoTexto>
-                    <CarrinhoTexto>{cart.nomeProduto}</CarrinhoTexto>
-                    <CarrinhoTexto>{cart.valorProduto}</CarrinhoTexto>
+                    <CarrinhoTexto>{cart.nome}</CarrinhoTexto>
+                    <CarrinhoTexto>{cart.preco}</CarrinhoTexto>
                     <CarrinhoButton onClick = {this.apagarProduto}>
                         Apagar Produto
                     </CarrinhoButton>

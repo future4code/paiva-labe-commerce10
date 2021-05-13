@@ -44,9 +44,9 @@ export default class App extends React.Component {
     textoFiltro: "",
     produtosCarrinho: [
      {
-    idProduto: 1,
-    nomeProduto: 'Tênis Nike Lebron Witness V',
-    valorProduto: 351,
+    id: 1,
+    nome: 'Tênis Nike Lebron Witness V',
+    preco: 351,
     qntdCompra: 2,
 
   }
@@ -67,7 +67,7 @@ export default class App extends React.Component {
     let noCarrinho = false
 
     const compraMais = this.state.produtosCarrinho.map((carrinho) => {
-      if(carrinho.idProduto === idProduto){
+      if(carrinho.id === idProduto){
         noCarrinho = true
         const aumentarQntd = {...carrinho,qntdCompra: carrinho.qntdCompra + 1}
         console.log(carrinho.qntdCompra)
@@ -82,23 +82,14 @@ export default class App extends React.Component {
 
       const selecionarProduto = produtos.map((produto) =>{
         if(produto.id === idProduto){
-          const novoProdutoCarrinho = {
-            idProduto: produto.id,
-            nomeProduto: produto.nome,
-            valorProduto: produto.preco,
-            qntdCompra:  1
-          
+            produto = {...produto, qntdCompra: 1}
+            this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})
           }
-          return(novoProdutoCarrinho)
-          console.log(novoProdutoCarrinho)
-        }
+          
+        })
+      }
 
-        this.setState({produtosCarrinho: [...this.state.produtosCarrinho,selecionarProduto]})
-        console.log(this.state.produtosCarrinho)
-      })
-
-    }
-  }
+      }
 
   render() {
 
