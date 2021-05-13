@@ -14,6 +14,8 @@ const ContainerAplicacao = styled.div`
   display: flex;
   justify-content: center;
 `
+
+//////////////////////////////////////////////////////////////////// LISTA PRODUTOS
 const produtos = [
   {
     id: 1,
@@ -35,30 +37,20 @@ const produtos = [
   }
 ]
 
-
-
 export default class App extends React.Component {
    state = {
     filtroMin: 0,
     filtroMax: 0,
     textoFiltro: "",
-    produtosCarrinho: [
-     {
-    id: 1,
-    nome: 'Tênis Nike Lebron Witness V',
-    preco: 351,
-    qntdCompra: 2,
-
-  }
-    ],
-
-    teste: ""
+    noCarrinho: false,
+    produtosCarrinho: [],
   }
 
   componentDidUpdate () {
-    console.log(this.state.produtosCarrinho)
-  }
+}
 
+
+//////////////////////////////////////////////////////////////////// APAGAR PRODUTO
   apagarProduto = (idProduto) => {
     const novoCarrinho = [...this.state.produtosCarrinho]
 
@@ -69,37 +61,51 @@ export default class App extends React.Component {
     this.setState({produtosCarrinho: carrinhoFiltrado})
 }
 
-  addProdutoAoCarrinho = (idProduto) => {
-    
-    let noCarrinho = false
+//////////////////////////////////////////////////////////////////// VERIFICAR CARRINHO
 
+veirificarCarrinho = (idProduto) => {
+  console.log('verificando id',idProduto)
+  const carrinhoFiltrado = this.state.produtosCarrinho.filter((carrinho)=> {
+    if(carrinho.id === idProduto){
+      this.setState({noCarrinho: true})
+    }else{
+      this.setState({noCarrinho: false})
+    }
+  })
+}
+ 
+//////////////////////////////////////////////////////////////////// AUMENTAR QUANTIDADE
+
+  aumentarQntd = (idProduto) => {
     const compraMais = this.state.produtosCarrinho.map((carrinho) => {
       if(carrinho.id === idProduto){
-        noCarrinho = true // True caso produto esteja no carrinho
-        const aumentarQntd = {...carrinho,qntdCompra: carrinho.qntdCompra} //Aumenta a quantidade no carrinho em 1
-        console.log('dentro de if carrinho',carrinho) 
+        
+        const aumentarQntd = {...carrinho,
+          qntdCompra: carrinho.qntdCompra + 1,
+          precoTotal: carrinho.qntdCompra * carrinho.preco} 
+          //Aumenta a quantidade no carrinho em 1 e multiplica o preco pela quantidade
+        console.log('Aumentando quantidade',carrinho.precoTotal) 
         return aumentarQntd
       }else{
-        alert("Não encontrado")
+        return carrinho
       }
     })
-    if(noCarrinho){
-      this.setState({produtosCarrinho: compraMais})
-      console.log('if no carrinho', compraMais)
-    }else{
 
-        const selecionarProduto = produtos.map((produto) =>{
-          if(produto.id === idProduto){
-              produto = {...produto, qntdCompra: 1}
-              console.log(produto)
-              this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})
-       
-            }
-            
-          })
-      }
-      console.log('novo produto', this.state.produtosCarrinho)
-      }
+    this.setState({produtosCarrinho: compraMais})
+  }
+//////////////////////////////////////////////////////////////////// ADICIONAR AO CARRINHO
+  addProdutoAoCarrinho = (idProduto) => {
+      const selecionarProduto = produtos.map((produto) =>{
+        if(produto.id === idProduto){
+          produto = {...produto, qntdCompra: 1,precoTotal: produto.preco}
+          this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})  
+        }        
+        })
+        
+    
+
+    console.log('novo produto', this.state.produtosCarrinho)
+    }
 
 
   render() {
@@ -109,13 +115,13 @@ export default class App extends React.Component {
         <Filtros />
         <Produtos 
       produtos={produtos}
-      addProdutoAoCarrinho = {this.addProdutoAoCarrinho}
+      addProdutoAoCarrinho =  {this.addProdutoAoCarrinho}
       />
         <Carrinho
         carrinhoCompra = {this.state.produtosCarrinho}
         apagarProduto = {this.apagarProduto}
+        aumentarQntd = {this.aumentarQntd}
         />
-        
       </ContainerAplicacao>
     )
   }

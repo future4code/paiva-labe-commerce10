@@ -14,6 +14,11 @@ export const CarrinhoButton = styled.button`
 
 
 export const CarrinhoTexto = styled.p`
-    color:white
+    color:white;
 `
+
+export const InputQntd = styled.input`
+    border: solid 1px black
+`
+
 
