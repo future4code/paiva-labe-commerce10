@@ -1,5 +1,5 @@
 import React from "react";
-import {CarrinhoArea,CarrinhoButton,CarrinhoProduto,CarrinhoTexto} from './styled'
+import {CarrinhoArea,InputQntd,CarrinhoButton,CarrinhoProduto,CarrinhoTexto} from './styled'
 
 export default class Carrinho extends React.Component{
     
@@ -8,6 +8,9 @@ export default class Carrinho extends React.Component{
     }
 
     
+    aumentarQntd = () => {
+
+    }
 
  
 
@@ -20,9 +23,10 @@ export default class Carrinho extends React.Component{
         const carrinho = this.props.carrinhoCompra.map((cart,index)=>{
             return(
                 <CarrinhoProduto>
-                    <CarrinhoTexto>x</CarrinhoTexto>
-                    <CarrinhoTexto></CarrinhoTexto>
-                    <CarrinhoTexto></CarrinhoTexto>
+                    <InputQntd value = {cart.qntdCompra} />
+                    <CarrinhoButton onClick = {() => this.props.aumentarQntd(cart.id)}>+</CarrinhoButton>
+                    <CarrinhoTexto>{cart.nome}</CarrinhoTexto>
+                    <CarrinhoTexto>{cart.preco}</CarrinhoTexto>
                     <CarrinhoButton onClick = {() => this.props.apagarProduto(cart.id)}>
                         Apagar Produto
                     </CarrinhoButton>
