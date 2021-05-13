@@ -47,7 +47,7 @@ export default class Produtos extends React.Component {
             return (
               <ListaProdutos 
                 produto={produto}
-                addProdutoAoCarrinho={this.props.addProdutoAoCarrinho}
+                addProdutoAoCarrinho={() => this.props.addProdutoAoCarrinho(produto.id)}
               />
             )
           })}

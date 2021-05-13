@@ -2,17 +2,42 @@ import React from "react";
 import {CarrinhoArea,CarrinhoButton,CarrinhoProduto,CarrinhoTexto} from './styled'
 
 export default class Carrinho extends React.Component{
+    
+    duplicarValor = () =>{
+
+    }
+
+    
+
+ 
+
     render(){
-        return(
-            <CarrinhoArea>
+        const valorTotal = (qntd,valor) => {
+            const carrinhoTotal = qntd * valor
+            return  carrinhoTotal
+        }
+
+        const carrinho = this.props.carrinhoCompra.map((cart,index)=>{
+            return(
                 <CarrinhoProduto>
-                    <CarrinhoTexto>Quantidade Produto</CarrinhoTexto>
-                    <CarrinhoTexto>Nome Produto</CarrinhoTexto>
-                    <CarrinhoButton>Apagar Produto</CarrinhoButton>
+                    <CarrinhoTexto>x</CarrinhoTexto>
+                    <CarrinhoTexto></CarrinhoTexto>
+                    <CarrinhoTexto></CarrinhoTexto>
+                    <CarrinhoButton onClick = {() => this.props.apagarProduto(cart.id)}>
+                        Apagar Produto
+                    </CarrinhoButton>
+
                 </CarrinhoProduto>
-                <CarrinhoTexto>Total total:</CarrinhoTexto>
-            </CarrinhoArea>            
-        )
+            )
+        })
+
+            return(
+                <CarrinhoArea>
+                    {carrinho}
+                    <CarrinhoTexto>Total total: R$</CarrinhoTexto>
+
+                </CarrinhoArea>            
+            )            
     }
 
     }

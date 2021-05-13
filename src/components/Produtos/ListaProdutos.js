@@ -33,7 +33,7 @@ export default class ListaProdutos extends React.Component {
           <p>{produto.nome}</p>
           <p>R${produto.preco},00</p>
         </InfoProduto>
-        <AdicionaProduto onClick={() => this.props.addProdutoAoCarrinho(produto.id)}>
+        <AdicionaProduto onClick={this.props.addProdutoAoCarrinho}>
           Comprar
         </AdicionaProduto>
       </Item>
