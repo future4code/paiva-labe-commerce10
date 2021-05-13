@@ -42,8 +42,13 @@ export default class App extends React.Component {
     filtroMin: 0,
     filtroMax: 0,
     textoFiltro: "",
+    noCarrinho: false,
     produtosCarrinho: [],
   }
+
+  componentDidUpdate () {
+}
+
 
 //////////////////////////////////////////////////////////////////// APAGAR PRODUTO
   apagarProduto = (idProduto) => {
@@ -56,13 +61,30 @@ export default class App extends React.Component {
     this.setState({produtosCarrinho: carrinhoFiltrado})
 }
 
+//////////////////////////////////////////////////////////////////// VERIFICAR CARRINHO
+
+veirificarCarrinho = (idProduto) => {
+  console.log('verificando id',idProduto)
+  const carrinhoFiltrado = this.state.produtosCarrinho.filter((carrinho)=> {
+    if(carrinho.id === idProduto){
+      this.setState({noCarrinho: true})
+    }else{
+      this.setState({noCarrinho: false})
+    }
+  })
+}
+ 
 //////////////////////////////////////////////////////////////////// AUMENTAR QUANTIDADE
 
   aumentarQntd = (idProduto) => {
     const compraMais = this.state.produtosCarrinho.map((carrinho) => {
       if(carrinho.id === idProduto){
-        const aumentarQntd = {...carrinho,qntdCompra: carrinho.qntdCompra + 1} //Aumenta a quantidade no carrinho em 1
-        console.log('dentro de if carrinho',carrinho) 
+        
+        const aumentarQntd = {...carrinho,
+          qntdCompra: carrinho.qntdCompra + 1,
+          precoTotal: carrinho.qntdCompra * carrinho.preco} 
+          //Aumenta a quantidade no carrinho em 1 e multiplica o preco pela quantidade
+        console.log('Aumentando quantidade',carrinho.precoTotal) 
         return aumentarQntd
       }else{
         return carrinho
@@ -73,17 +95,17 @@ export default class App extends React.Component {
   }
 //////////////////////////////////////////////////////////////////// ADICIONAR AO CARRINHO
   addProdutoAoCarrinho = (idProduto) => {
-    const selecionarProduto = produtos.map((produto) =>{
-      if(produto.id === idProduto){
-          produto = {...produto, qntdCompra: 1}
-          console.log(produto)
-          this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})
-    
-        }
+      const selecionarProduto = produtos.map((produto) =>{
+        if(produto.id === idProduto){
+          produto = {...produto, qntdCompra: 1,precoTotal: produto.preco}
+          this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})  
+        }        
+        })
         
-      })
+    
+
     console.log('novo produto', this.state.produtosCarrinho)
-  }
+    }
 
 
   render() {
@@ -93,14 +115,13 @@ export default class App extends React.Component {
         <Filtros />
         <Produtos 
       produtos={produtos}
-      addProdutoAoCarrinho = {this.addProdutoAoCarrinho}
+      addProdutoAoCarrinho =  {this.addProdutoAoCarrinho}
       />
         <Carrinho
         carrinhoCompra = {this.state.produtosCarrinho}
         apagarProduto = {this.apagarProduto}
         aumentarQntd = {this.aumentarQntd}
         />
-        
       </ContainerAplicacao>
     )
   }
