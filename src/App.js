@@ -14,6 +14,8 @@ const ContainerAplicacao = styled.div`
   display: flex;
   justify-content: center;
 `
+
+//////////////////////////////////////////////////////////////////// LISTA PRODUTOS
 const produtos = [
   {
     id: 1,
@@ -35,8 +37,6 @@ const produtos = [
   }
 ]
 
-
-
 export default class App extends React.Component {
    state = {
     filtroMin: 0,
@@ -45,10 +45,7 @@ export default class App extends React.Component {
     produtosCarrinho: [],
   }
 
-  componentDidUpdate () {
-    console.log(this.state.produtosCarrinho)
-  }
-
+//////////////////////////////////////////////////////////////////// APAGAR PRODUTO
   apagarProduto = (idProduto) => {
     const novoCarrinho = [...this.state.produtosCarrinho]
 
@@ -58,6 +55,8 @@ export default class App extends React.Component {
 
     this.setState({produtosCarrinho: carrinhoFiltrado})
 }
+
+//////////////////////////////////////////////////////////////////// AUMENTAR QUANTIDADE
 
   aumentarQntd = (idProduto) => {
     const compraMais = this.state.produtosCarrinho.map((carrinho) => {
@@ -72,7 +71,7 @@ export default class App extends React.Component {
 
     this.setState({produtosCarrinho: compraMais})
   }
-
+//////////////////////////////////////////////////////////////////// ADICIONAR AO CARRINHO
   addProdutoAoCarrinho = (idProduto) => {
     const selecionarProduto = produtos.map((produto) =>{
       if(produto.id === idProduto){
