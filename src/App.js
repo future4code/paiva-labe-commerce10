@@ -1,41 +1,62 @@
 import React from 'react';
-import Filtros from './components/Filtros/Filtros';
+import Header from './components/Header/Header';
 import Produtos from './components/Produtos/Produtos'
 import Carrinho from './components/Carrinho/Carrinho';
+import GlobalStyles from './styles/global'
 import foto1 from './assets/image1.png'
 import foto2 from './assets/image2.png'
 import foto3 from './assets/image3.png'
-// import foto4 from './assets/image4.png'
-// import foto5 from './assets/image5.png'
-// import foto6 from './assets/image6.png'
+import foto4 from './assets/image4.png'
+import foto5 from './assets/image5.png'
+import foto6 from './assets/image6.png'
 import styled from 'styled-components'
 
 const ContainerAplicacao = styled.div`
+  margin: 0 auto;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 `
 
 //////////////////////////////////////////////////////////////////// LISTA PRODUTOS
 const produtos = [
   {
     id: 1,
-    nome: 'Tênis Nike Lebron Witness V',
-    preco: 351,
+    nome: "Tênis Nike Lebron Witness V",
+    preco: 180,
     foto: foto1
   },
   {
     id: 2,
-    nome: 'Tênis Nike Fly.By Mid 2',
+    nome: "Tênis Nike Fly.By Mid 2",
     preco: 275,
     foto: foto2
   },
   {
     id: 3,
-    nome: 'Tênis Nike Lebron Witness V',
+    nome: "Tênis Nike Lebron Witness V Preto",
     preco: 231,
     foto: foto3
+  },
+  {
+    id: 4,
+    nome: "Tênis Air Jordan XXXV",
+    preco: 899,
+    foto: foto4
+  },
+  {
+    id: 5,
+    nome: "Tênis Nike Fly.By Mid 2",
+    preco: 275,
+    foto: foto5
+  },
+  {
+    id: 6,
+    nome: "Tênis Nike Jordan React Elevation",
+    preco: 649,
+    foto: foto6
   }
-]
+];
 
 export default class App extends React.Component {
   state = {
@@ -120,7 +141,8 @@ export default class App extends React.Component {
 
     return (
       <ContainerAplicacao>
-        <Filtros />
+        <GlobalStyles />
+        <Header />
         <Produtos
           produtos={produtos}
           addProdutoAoCarrinho={this.addProdutoAoCarrinho}
