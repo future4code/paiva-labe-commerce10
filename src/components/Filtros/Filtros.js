@@ -11,7 +11,7 @@ grid-column: 1/2;
 
 
 
-class Filtros extends React.Component {
+export class Filtros extends React.Component {
     state = {
         minimo: '',
         maximo: '',
@@ -54,7 +54,8 @@ class Filtros extends React.Component {
                 return produto
             }
         })
-
+	
+	const produtos = filtro; // A lista filtrada
         
         return (
             <div>
@@ -68,7 +69,7 @@ class Filtros extends React.Component {
                     <input value={this.state.buscaProduto} onChange={this.onChangeBusca}></input>
                 </FiltrosContainer>
 
-                <Produtos produtos={filtro} />
+                <Produtos produtos={produtos} />
             </div>
         )
     }

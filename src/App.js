@@ -144,7 +144,7 @@ export default class App extends React.Component {
         <GlobalStyles />
         <Header />
         <Produtos
-          //produtos={produtos} : Isso está agora em filtros, pois vou tratá-la.by: Silas
+          //produtos={produtos} : Isso está agora em Filtros, pois vou filtrar a lista .by: Silas
           addProdutoAoCarrinho={this.addProdutoAoCarrinho}
         />
         <Carrinho
