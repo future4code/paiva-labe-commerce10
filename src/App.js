@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './components/Header/Header';
+import Filtros from './components/Filtros/Filtros';
 import Carrinho from './components/Carrinho/Carrinho';
 import Produtos from './components/Produtos/Produtos'
 import GlobalStyles from './styles/global'
@@ -143,6 +144,7 @@ export default class App extends React.Component {
       <ContainerAplicacao>
         <GlobalStyles />
         <Header />
+        <Filtros produtos={produtos} />
         <Produtos
           //produtos={produtos} : Isso está agora em Filtros, pois vou filtrar a lista .by: Silas
           addProdutoAoCarrinho={this.addProdutoAoCarrinho}

@@ -31,20 +31,16 @@ export class Filtros extends React.Component {
     }
 
 //-----------------------------------------------------------
-    componentDidUpdate() {
-        console.log('update')
-    }
 
-  
     render() {
     //
-        const produtos = this.props.produtos
-        const inputMinusculo = this.state.buscaProduto.toLowerCase()
+        const lprodutos = this.props.lprodutos
+        const inputMinusculo = this.state.buscaProduto.toLowerCase();
 
        
-        const buscaNome = produtos.filter(produto => {
-            let produtoNome = produto.nome.toLowerCase()
-            return produtoNome.search(inputMinusculo) !== -1
+        const buscaNome = lprodutos.filter(produto => {
+            let produtoNome = produto.nome.toLowerCase();
+            return produtoNome.search(inputMinusculo);
         })
 
         const filtro = buscaNome.filter(produto => {
@@ -56,7 +52,7 @@ export class Filtros extends React.Component {
         })
 	
 	const produtos = filtro; // A lista filtrada
-        
+        console.log("RETORNO ---------->",this.state.produtos);
         return (
             <div>
                 <FiltrosContainer>
