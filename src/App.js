@@ -21,7 +21,7 @@ const produtos = [
     id: 1,
     nome: 'Tênis Nike Lebron Witness V',
     preco: 351,
-    foto: foto1 
+    foto: foto1
   },
   {
     id: 2,
@@ -38,74 +38,82 @@ const produtos = [
 ]
 
 export default class App extends React.Component {
-   state = {
+  state = {
     filtroMin: 0,
     filtroMax: 0,
     textoFiltro: "",
-    noCarrinho: false,
-    produtosCarrinho: [],
-  }
-
-  componentDidUpdate () {
-}
-
-
-//////////////////////////////////////////////////////////////////// APAGAR PRODUTO
-  apagarProduto = (idProduto) => {
-    const novoCarrinho = [...this.state.produtosCarrinho]
-
-    const carrinhoFiltrado = novoCarrinho.filter((carrinho)=> {
-      return carrinho.id !==idProduto
-    })
-
-    this.setState({produtosCarrinho: carrinhoFiltrado})
-}
-
-//////////////////////////////////////////////////////////////////// VERIFICAR CARRINHO
-
-veirificarCarrinho = (idProduto) => {
-  console.log('verificando id',idProduto)
-  const carrinhoFiltrado = this.state.produtosCarrinho.filter((carrinho)=> {
-    if(carrinho.id === idProduto){
-      this.setState({noCarrinho: true})
-    }else{
-      this.setState({noCarrinho: false})
-    }
-  })
-}
- 
-//////////////////////////////////////////////////////////////////// AUMENTAR QUANTIDADE
-
-  aumentarQntd = (idProduto) => {
-    const compraMais = this.state.produtosCarrinho.map((carrinho) => {
-      if(carrinho.id === idProduto){
-        
-        const aumentarQntd = {...carrinho,
-          qntdCompra: carrinho.qntdCompra + 1,
-          precoTotal: carrinho.qntdCompra * carrinho.preco} 
-          //Aumenta a quantidade no carrinho em 1 e multiplica o preco pela quantidade
-        console.log('Aumentando quantidade',carrinho.precoTotal) 
-        return aumentarQntd
-      }else{
-        return carrinho
+    produtosCarrinho: [
+      {
+        id: 3,
+        nome: 'Tênis Nike Lebron Witness V',
+        preco: 231,
+        foto: foto3,
+        qntdCompra: 3
       }
-    })
-
-    this.setState({produtosCarrinho: compraMais})
+    ]
   }
-//////////////////////////////////////////////////////////////////// ADICIONAR AO CARRINHO
-  addProdutoAoCarrinho = (idProduto) => {
-      const selecionarProduto = produtos.map((produto) =>{
-        if(produto.id === idProduto){
-          produto = {...produto, qntdCompra: 1,precoTotal: produto.preco}
-          this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})  
-        }        
-        })
-        
-    
 
-    console.log('novo produto', this.state.produtosCarrinho)
+  componentDidMount() {
+    console.log(this.state.produtosCarrinho)
+  }
+
+  componentDidUpdate() {
+    console.log(this.state.produtosCarrinho)
+  }
+
+  multiplicaValor = () => {
+
+  }
+
+  apagarProduto = (idProduto) => {
+    const taCarrinho = this.state.produtosCarrinho.find(produto => idProduto === produto.id)
+
+    if (taCarrinho) {
+      const novoProdutoCarrinho = this.state.produtosCarrinho.map(produto => {
+        if (idProduto === produto.id) {
+          return {
+            ...produto,
+            qntdCompra: produto.qntdCompra - 1
+          }
+        }
+
+        return produto
+      }).filter((produto) => produto.qntdCompra > 0)
+      this.setState({ produtosCarrinho: novoProdutoCarrinho })
     }
+
+
+  }
+
+  addProdutoAoCarrinho = (idProduto) => {
+    const taCarrinho = this.state.produtosCarrinho.find(produto => idProduto === produto.id)
+
+    if (taCarrinho) {
+      const novoProdutoCarrinho = this.state.produtosCarrinho.map(produto => {
+        if (idProduto === produto.id) {
+          return {
+            ...produto,
+            qntdCompra: produto.qntdCompra + 1,
+          }
+        }
+
+        return produto
+      })
+
+      this.setState({ produtosCarrinho: novoProdutoCarrinho })
+    } else {
+      const novoProduto = produtos.find(produto => idProduto === produto.id)
+
+      const novoProdutoCarrinho = [...this.state.produtosCarrinho,
+      {
+        ...novoProduto,
+        qntdCompra: 1,
+      }]
+
+      this.setState({ produtosCarrinho: novoProdutoCarrinho })
+    }
+  }
+
 
 
   render() {
@@ -113,14 +121,14 @@ veirificarCarrinho = (idProduto) => {
     return (
       <ContainerAplicacao>
         <Filtros />
-        <Produtos 
-      produtos={produtos}
-      addProdutoAoCarrinho =  {this.addProdutoAoCarrinho}
-      />
+        <Produtos
+          produtos={produtos}
+          addProdutoAoCarrinho={this.addProdutoAoCarrinho}
+        />
         <Carrinho
-        carrinhoCompra = {this.state.produtosCarrinho}
-        apagarProduto = {this.apagarProduto}
-        aumentarQntd = {this.aumentarQntd}
+          carrinhoCompra={this.state.produtosCarrinho}
+          apagarProduto={this.apagarProduto}
+          multiplicaValor={this.multiplicaValor}
         />
       </ContainerAplicacao>
     )
