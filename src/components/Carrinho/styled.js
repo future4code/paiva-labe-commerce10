@@ -20,5 +20,3 @@ export const CarrinhoTexto = styled.p`
 export const InputQntd = styled.input`
     border: solid 1px black
 `
-
-

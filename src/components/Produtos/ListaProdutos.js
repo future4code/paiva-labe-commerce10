@@ -1,57 +1,92 @@
 import React from "react";
 import styled from "styled-components";
+import { MdAddShoppingCart } from 'react-icons/md';
+import { darken } from 'polished';
 
-const Item = styled.div`
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  &:hover {
-    border: 0.5px solid lightgray;
-  }
-  img {
-    border-radius: 1rem;
-    padding: 0.2rem;
-  }
-`;
-const InfoProduto = styled.div`
-  display: flex;
-  padding: 0 1rem;
-  flex-direction: column;
-  p {
-    color: lightblue;
-    margin: 0.25rem;
-  }
-  span {
-    p {
-      color: black;
-      text-align: center;
+const Item = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  list-style: none;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 4px;
+    padding: 20px;
+
+    img {
+      align-self: center;
+      max-width: 250px;
+    }
+
+    > strong {
+      font-size: 16px;
+      line-height: 20px;
+      color: #333;
+      margin-top: 5px;
+    }
+
+    > span {
+      font-size: 21px;
+      font-weight: bold;
+      margin: 5px 0 20px;
+      color: #333;
+    }
+
+    button {
+      background: #191920;
+      color: #fff;
+      border: 0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: auto;
+
+      display: flex;
+      align-items: center;
+      transition: background 0.2s;
+
+      &:hover {
+        background: ${darken(0.06, '#191920')};
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.1);
+
+        svg {
+          margin-right: 5px;
+        }
+      }
+
+      span {
+        flex: 1;
+        text-align: center;
+        font-weight: bold;
+      }
     }
   }
 `;
-
-const AdicionaProduto = styled.button`
-  border: none;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  margin: 1rem;
-  cursor: pointer;
-  align-self: center;
-  width: 50%;
-`;
-
 export default class ListaProdutos extends React.Component {
   render() {
     const produto = this.props.produto;
     return (
       <Item>
-        <img src={produto.foto} />
-        <InfoProduto>
-          <p>{produto.nome}</p>
-          <p>R${produto.preco},00</p>
-        </InfoProduto>
-        <AdicionaProduto onClick={this.props.addProdutoAoCarrinho}>
-          Comprar
-        </AdicionaProduto>
+        <li>
+          <img src={produto.foto} alt={produto.nome} />
+          <strong>{produto.nome}</strong>
+          <span>R${produto.preco},00</span>
+          <button type="button" onClick={this.props.addProdutoAoCarrinho}>
+            <div>
+              <MdAddShoppingCart size={16} color="#FFF" />
+            </div>
+            <span>COMPRAR</span>
+          </button>
+        </li>
+
       </Item>
     );
   }

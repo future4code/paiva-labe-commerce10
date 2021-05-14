@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import { CarrinhoArea, InputQntd, CarrinhoButton, CarrinhoProduto, CarrinhoTexto } from './styled'
 
 export default class Carrinho extends React.Component {
@@ -22,7 +22,6 @@ export default class Carrinho extends React.Component {
         return valorTotal
 
     }
-
     render() {
 
         const preco = this.props.carrinhoCompra.preco === this.props.carrinhoCompra.precoTotal
@@ -50,3 +49,5 @@ export default class Carrinho extends React.Component {
     }
 
 }
+
+    
