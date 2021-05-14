@@ -1,6 +1,5 @@
 import React from "react";
 import ListaProdutos from "./ListaProdutos";
-import Filtros from "../Filtros/Filtros";
 import styled from "styled-components";
 
 const ContainerProdutos = styled.div`
@@ -57,7 +56,7 @@ export default class Produtos extends React.Component {
     return (
       <ContainerProdutos>
         <HeaderProdutos>
-          <Filtros />
+          
           <label>
             <span>Ordenar por: </span>
             <select onChange={this.ordenarProdutos} value={this.state.ordenar}>

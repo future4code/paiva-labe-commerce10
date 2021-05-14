@@ -1,6 +1,6 @@
-import React from 'react'
-import ListaProdutos from ../Produtos/ListaProdutos
-import styled from 'styled-components'
+import React from 'react';
+import Produtos from '../Produtos/Produtos';
+import styled from 'styled-components';
 
 
 const FiltrosContainer = styled.div`
@@ -11,12 +11,11 @@ grid-column: 1/2;
 
 
 
-class Filtros extends React.Component {
+export class Filtros extends React.Component {
     state = {
         minimo: '',
         maximo: '',
         buscaProduto: '',
-        compras: [],
     }
 
     onChangeMinimo = (event) => {
@@ -31,10 +30,6 @@ class Filtros extends React.Component {
         this.setState({ buscaProduto: event.target.value })
     }
 
-    onClickComprar = (produto) => {                    // TALVEZ ALGUÉM QUEIRA USAR ESTA FUNÇÃO
-        console.log('clicou', produto)                 // QUEM ESTÁ FAZENDO O CARRINHO, PEGUE A LISTA
-        this.state.compras.push(produto)               // DE COMPRAS NO ESTADO, CASO QUEIRA.
-     }
 //-----------------------------------------------------------
     componentDidUpdate() {
         console.log('update')
@@ -59,9 +54,11 @@ class Filtros extends React.Component {
                 return produto
             }
         })
-
+	
+	const produtos = filtro; // A lista filtrada
+        
         return (
-
+            <div>
                 <FiltrosContainer>
                     <h2>Filtros</h2>
                     <label>Valor Mínimo</label>
@@ -71,9 +68,9 @@ class Filtros extends React.Component {
                     <label>Buscar Produto</label>
                     <input value={this.state.buscaProduto} onChange={this.onChangeBusca}></input>
                 </FiltrosContainer>
-                
-                <ListaProdutos estadosFiltro={state} produtos={produtos}/>  // EsTADOS E PRODUTOS PARA 
-              									//ListaProduto
+
+                <Produtos produtos={produtos} />
+            </div>
         )
     }
 }
