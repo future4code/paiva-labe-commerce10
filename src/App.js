@@ -14,12 +14,14 @@ const ContainerAplicacao = styled.div`
   display: flex;
   justify-content: center;
 `
+
+//////////////////////////////////////////////////////////////////// LISTA PRODUTOS
 const produtos = [
   {
     id: 1,
     nome: 'Tênis Nike Lebron Witness V',
     preco: 351,
-    foto: foto1 
+    foto: foto1
   },
   {
     id: 2,
@@ -35,71 +37,83 @@ const produtos = [
   }
 ]
 
-
-
 export default class App extends React.Component {
-   state = {
+  state = {
     filtroMin: 0,
     filtroMax: 0,
     textoFiltro: "",
     produtosCarrinho: [
-     {
-    id: 1,
-    nome: 'Tênis Nike Lebron Witness V',
-    preco: 351,
-    qntdCompra: 2,
-
-  }
-    ],
-
-    teste: ""
+      {
+        id: 3,
+        nome: 'Tênis Nike Lebron Witness V',
+        preco: 231,
+        foto: foto3,
+        qntdCompra: 3
+      }
+    ]
   }
 
-  componentDidUpdate () {
+  componentDidMount() {
     console.log(this.state.produtosCarrinho)
   }
 
+  componentDidUpdate() {
+    console.log(this.state.produtosCarrinho)
+  }
+
+  multiplicaValor = () => {
+
+  }
+
   apagarProduto = (idProduto) => {
-    const novoCarrinho = [...this.state.produtosCarrinho]
+    const taCarrinho = this.state.produtosCarrinho.find(produto => idProduto === produto.id)
 
-    const carrinhoFiltrado = novoCarrinho.filter((carrinho)=> {
-      return carrinho.id !==idProduto
-    })
+    if (taCarrinho) {
+      const novoProdutoCarrinho = this.state.produtosCarrinho.map(produto => {
+        if (idProduto === produto.id) {
+          return {
+            ...produto,
+            qntdCompra: produto.qntdCompra - 1
+          }
+        }
 
-    this.setState({produtosCarrinho: carrinhoFiltrado})
-}
+        return produto
+      }).filter((produto) => produto.qntdCompra > 0)
+      this.setState({ produtosCarrinho: novoProdutoCarrinho })
+    }
+
+
+  }
 
   addProdutoAoCarrinho = (idProduto) => {
-    
-    let noCarrinho = false
+    const taCarrinho = this.state.produtosCarrinho.find(produto => idProduto === produto.id)
 
-    const compraMais = this.state.produtosCarrinho.map((carrinho) => {
-      if(carrinho.id === idProduto){
-        noCarrinho = true // True caso produto esteja no carrinho
-        const aumentarQntd = {...carrinho,qntdCompra: carrinho.qntdCompra} //Aumenta a quantidade no carrinho em 1
-        console.log('dentro de if carrinho',carrinho) 
-        return aumentarQntd
-      }else{
-        alert("Não encontrado")
-      }
-    })
-    if(noCarrinho){
-      this.setState({produtosCarrinho: compraMais})
-      console.log('if no carrinho', compraMais)
-    }else{
+    if (taCarrinho) {
+      const novoProdutoCarrinho = this.state.produtosCarrinho.map(produto => {
+        if (idProduto === produto.id) {
+          return {
+            ...produto,
+            qntdCompra: produto.qntdCompra + 1,
+          }
+        }
 
-        const selecionarProduto = produtos.map((produto) =>{
-          if(produto.id === idProduto){
-              produto = {...produto, qntdCompra: 1}
-              console.log(produto)
-              this.setState({produtosCarrinho: [...this.state.produtosCarrinho,produto]})
-       
-            }
-            
-          })
-      }
-      console.log('novo produto', this.state.produtosCarrinho)
-      }
+        return produto
+      })
+
+      this.setState({ produtosCarrinho: novoProdutoCarrinho })
+    } else {
+      const novoProduto = produtos.find(produto => idProduto === produto.id)
+
+      const novoProdutoCarrinho = [...this.state.produtosCarrinho,
+      {
+        ...novoProduto,
+        qntdCompra: 1,
+      }]
+
+      this.setState({ produtosCarrinho: novoProdutoCarrinho })
+    }
+  }
+
 
 
   render() {
@@ -107,15 +121,15 @@ export default class App extends React.Component {
     return (
       <ContainerAplicacao>
         <Filtros />
-        <Produtos 
-      produtos={produtos}
-      addProdutoAoCarrinho = {this.addProdutoAoCarrinho}
-      />
-        <Carrinho
-        carrinhoCompra = {this.state.produtosCarrinho}
-        apagarProduto = {this.apagarProduto}
+        <Produtos
+          produtos={produtos}
+          addProdutoAoCarrinho={this.addProdutoAoCarrinho}
         />
-        
+        <Carrinho
+          carrinhoCompra={this.state.produtosCarrinho}
+          apagarProduto={this.apagarProduto}
+          multiplicaValor={this.multiplicaValor}
+        />
       </ContainerAplicacao>
     )
   }

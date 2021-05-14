@@ -1,29 +1,38 @@
 import React from "react";
-import {CarrinhoArea,CarrinhoButton,CarrinhoProduto,CarrinhoTexto} from './styled'
+import { CarrinhoArea, InputQntd, CarrinhoButton, CarrinhoProduto, CarrinhoTexto } from './styled'
 
-export default class Carrinho extends React.Component{
-    
-    duplicarValor = () =>{
+export default class Carrinho extends React.Component {
+
+
+
+    multiplicarValor = (qntd, valor) => {
+        const carrinhoTotal = qntd * valor
+        console.log(carrinhoTotal)
+        return carrinhoTotal
+    }
+
+
+    valorTotal = () => {
+        const carrinho = this.props.carrinhoCompra
+        let valorTotal = 0
+
+        for (let produto of carrinho) {
+            valorTotal += produto.preco * produto.qntdCompra
+        }
+        return valorTotal
 
     }
 
-    
+    render() {
 
- 
-
-    render(){
-        const valorTotal = (qntd,valor) => {
-            const carrinhoTotal = qntd * valor
-            return  carrinhoTotal
-        }
-
-        const carrinho = this.props.carrinhoCompra.map((cart,index)=>{
-            return(
+        const preco = this.props.carrinhoCompra.preco === this.props.carrinhoCompra.precoTotal
+        const carrinho = this.props.carrinhoCompra.map((cart, index) => {
+            return (
                 <CarrinhoProduto>
-                    <CarrinhoTexto>x</CarrinhoTexto>
-                    <CarrinhoTexto></CarrinhoTexto>
-                    <CarrinhoTexto></CarrinhoTexto>
-                    <CarrinhoButton onClick = {() => this.props.apagarProduto(cart.id)}>
+                    <CarrinhoTexto>{cart.qntdCompra}</CarrinhoTexto>
+                    <CarrinhoTexto>{cart.nome}</CarrinhoTexto>
+                    <CarrinhoTexto>R${this.multiplicarValor(cart.qntdCompra, cart.preco)}</CarrinhoTexto>
+                    <CarrinhoButton onClick={() => this.props.apagarProduto(cart.id)}>
                         Apagar Produto
                     </CarrinhoButton>
 
@@ -31,13 +40,13 @@ export default class Carrinho extends React.Component{
             )
         })
 
-            return(
-                <CarrinhoArea>
-                    {carrinho}
-                    <CarrinhoTexto>Total total: R$</CarrinhoTexto>
+        return (
+            <CarrinhoArea>
+                {carrinho}
+                <CarrinhoTexto>Total: R${this.valorTotal()},00 </CarrinhoTexto>
 
-                </CarrinhoArea>            
-            )            
+            </CarrinhoArea>
+        )
     }
 
-    }
+}
