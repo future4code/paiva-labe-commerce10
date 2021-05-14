@@ -144,7 +144,7 @@ export default class App extends React.Component {
         <GlobalStyles />
         <Header />
         <Produtos
-          produtos={produtos}
+          //produtos={produtos} : Isso está agora em filtros, pois vou tratá-la.by: Silas
           addProdutoAoCarrinho={this.addProdutoAoCarrinho}
         />
         <Carrinho
