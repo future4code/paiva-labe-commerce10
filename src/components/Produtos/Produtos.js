@@ -42,13 +42,19 @@ export default class Produtos extends React.Component {
   state = {
     ordenar: "decrescente"
   };
+
   ordenarProdutos = (event) => {
     this.setState({ ordenar: event.target.value });
   };
+
   ordenarListaFiltrada = () => {
-    return this.props.produtos.sort((a, b) =>
-      this.state.ordenar === "crescente" ? a.preco - b.preco : b.preco - a.preco
-    );
+    return this.props.produtos
+      .filter((produto) => this.props.maximo ? produto.preco < this.props.maximo : true)
+      .filter((produto) => this.props.minimo ? produto.preco > this.props.minimo : true)
+      .filter((produto) => this.props.buscaProduto ? produto.nome.includes(this.props.buscaProduto) : true)
+      .sort((a, b) =>
+        this.state.ordenar === "crescente" ? a.preco - b.preco : b.preco - a.preco
+      );
   };
 
   render() {
@@ -56,7 +62,7 @@ export default class Produtos extends React.Component {
     return (
       <ContainerProdutos>
         <HeaderProdutos>
-          
+
           <label>
             <span>Ordenar por: </span>
             <select onChange={this.ordenarProdutos} value={this.state.ordenar}>

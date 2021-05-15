@@ -1,5 +1,5 @@
 import React from "react"
-import { CarrinhoArea, InputQntd, CarrinhoButton, CarrinhoProduto, CarrinhoTexto } from './styled'
+import { CarrinhoArea, CarrinhoButton, CarrinhoProduto, CarrinhoTexto } from './styled'
 
 export default class Carrinho extends React.Component {
 
@@ -24,7 +24,6 @@ export default class Carrinho extends React.Component {
     }
     render() {
 
-        const preco = this.props.carrinhoCompra.preco === this.props.carrinhoCompra.precoTotal
         const carrinho = this.props.carrinhoCompra.map((cart, index) => {
             return (
                 <CarrinhoProduto>

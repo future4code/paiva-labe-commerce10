@@ -19,7 +19,6 @@ const ContainerAplicacao = styled.div`
   flex-direction: column;
 `
 
-//////////////////////////////////////////////////////////////////// LISTA PRODUTOS
 const produtos = [
   {
     id: 1,
@@ -61,9 +60,9 @@ const produtos = [
 
 export default class App extends React.Component {
   state = {
-    filtroMin: 0,
-    filtroMax: 0,
-    textoFiltro: "",
+    minimo: 0,
+    maximo: 0,
+    buscaProduto: "",
     produtosCarrinho: [
       {
         id: 3,
@@ -83,8 +82,16 @@ export default class App extends React.Component {
     console.log(this.state.produtosCarrinho)
   }
 
-  multiplicaValor = () => {
+  onChangeMinimo = (event) => {
+    this.setState({ minimo: event.target.value })
+  }
 
+  onChangeMaximo = (event) => {
+    this.setState({ maximo: event.target.value })
+  }
+
+  onChangeBusca = (event) => {
+    this.setState({ buscaProduto: event.target.value })
   }
 
   apagarProduto = (idProduto) => {
@@ -144,9 +151,19 @@ export default class App extends React.Component {
       <ContainerAplicacao>
         <GlobalStyles />
         <Header />
-        <Filtros produtos={produtos} />
+        <Filtros
+          minimo={this.state.minimo}
+          maximo={this.state.maximo}
+          buscaProduto={this.state.buscaProduto}
+          onChangeMinimo={this.onChangeMinimo}
+          onChangeMaximo={this.onChangeMaximo}
+          onChangeBusca={this.onChangeBusca}
+        />
         <Produtos
-          //produtos={produtos} : Isso está agora em Filtros, pois vou filtrar a lista .by: Silas
+          produtos={produtos}
+          minimo={this.state.minimo}
+          maximo={this.state.maximo}
+          buscaProduto={this.state.buscaProduto}
           addProdutoAoCarrinho={this.addProdutoAoCarrinho}
         />
         <Carrinho
