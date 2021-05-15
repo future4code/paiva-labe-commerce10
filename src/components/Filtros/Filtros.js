@@ -1,5 +1,4 @@
 import React from 'react';
-import Produtos from '../Produtos/Produtos';
 import styled from 'styled-components';
 
 
@@ -7,65 +6,27 @@ const FiltrosContainer = styled.div`
 display: flex;
 flex-direction: column;
 grid-column: 1/2;
+color: white;
 `
 
 
 
 export class Filtros extends React.Component {
-    state = {
-        minimo: '',
-        maximo: '',
-        buscaProduto: '',
-    }
 
-    onChangeMinimo = (event) => {
-        this.setState({ minimo: event.target.value })
-    }
 
-    onChangeMaximo = (event) => {
-        this.setState({ maximo: event.target.value })
-    }
-
-    onChangeBusca = (event) => {
-        this.setState({ buscaProduto: event.target.value })
-    }
-
-//-----------------------------------------------------------
 
     render() {
-    //
-        const lprodutos = this.props.lprodutos
-        const inputMinusculo = this.state.buscaProduto.toLowerCase();
-
-       
-        const buscaNome = lprodutos.filter(produto => {
-            let produtoNome = produto.nome.toLowerCase();
-            return produtoNome.search(inputMinusculo);
-        })
-
-        const filtro = buscaNome.filter(produto => {
-            if (((produto.value >= this.state.minimo) && (produto.value <= this.state.maximo)) ||
-                ((produto.value >= this.state.minimo) && (this.state.maximo === '')) ||
-                ((this.state.minimo === '') && (this.state.maximo === ''))) {
-                return produto
-            }
-        })
-	
-	const produtos = filtro; // A lista filtrada
-        console.log("RETORNO ---------->",this.state.produtos);
         return (
             <div>
                 <FiltrosContainer>
                     <h2>Filtros</h2>
                     <label>Valor Mínimo</label>
-                    <input type='Number' value={this.state.minimo} onChange={this.onChangeMinimo}></input>
+                    <input type='Number' value={this.props.minimo} onChange={this.props.onChangeMinimo}></input>
                     <label>Valor Máximo</label>
-                    <input type='Number' value={this.state.maximo} onChange={this.onChangeMaximo}></input>
+                    <input type='Number' value={this.props.maximo} onChange={this.props.onChangeMaximo}></input>
                     <label>Buscar Produto</label>
-                    <input value={this.state.buscaProduto} onChange={this.onChangeBusca}></input>
+                    <input value={this.props.buscaProduto} onChange={this.props.onChangeBusca}></input>
                 </FiltrosContainer>
-
-                <Produtos produtos={produtos} />
             </div>
         )
     }
