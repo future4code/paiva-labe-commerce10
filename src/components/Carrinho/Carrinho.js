@@ -1,5 +1,6 @@
 import React from "react"
-import { CarrinhoArea, CarrinhoButton, CarrinhoProduto, CarrinhoTexto } from './styled'
+import { Container, ProductTable, Total } from "./styled";
+import { MdDelete } from "react-icons/md";
 
 export default class Carrinho extends React.Component {
 
@@ -26,27 +27,60 @@ export default class Carrinho extends React.Component {
 
         const carrinho = this.props.carrinhoCompra.map((cart, index) => {
             return (
-                <CarrinhoProduto>
-                    <CarrinhoTexto>{cart.qntdCompra}</CarrinhoTexto>
-                    <CarrinhoTexto>{cart.nome}</CarrinhoTexto>
-                    <CarrinhoTexto>R${this.multiplicarValor(cart.qntdCompra, cart.preco)}</CarrinhoTexto>
-                    <CarrinhoButton onClick={() => this.props.apagarProduto(cart.id)}>
-                        Apagar Produto
-                    </CarrinhoButton>
-
-                </CarrinhoProduto>
-            )
-        })
-
-        return (
-            <CarrinhoArea>
-                {carrinho}
-                <CarrinhoTexto>Total: R${this.valorTotal()},00 </CarrinhoTexto>
-
-            </CarrinhoArea>
-        )
-    }
-
-}
+              <Container>
+                <ProductTable>
+                  <thead>
+                    <tr>
+                      <th>PRODUTO</th>
+                      <th>QTD</th>
+                      <th>SUBTOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>{cart.nome}</strong>
+                        <span>{cart.preco}</span>
+                      </td>
+                      <td>
+                        <div>
+                          <input type="text" readOnly value={cart.qntdCompra} />
+                        </div>
+                      </td>
+                      <td>
+                        <strong>
+                          R${this.multiplicarValor(cart.qntdCompra, cart.preco)}
+                        </strong>
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          onClick={() => this.props.apagarProduto(cart.id)}
+                        >
+                          <MdDelete size={20} />
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </ProductTable>
+              </Container>
+            );
+          });
+          return (
+            <Container>
+              {carrinho}
+              <footer>
+                <button type="button">Finalizar pedido</button>
+      
+                <Total>
+                  <span>TOTAL</span>
+                  <strong>R${this.valorTotal()},00</strong>
+                </Total>
+              </footer>
+            </Container>
+          );
+        }
+      }
+      
 
     
