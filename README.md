@@ -24,10 +24,10 @@ Tecnologias Utilizadas:
 - Armazenamento das informações da página(uma vez atualizada, as informações são perdidas)
 
 ## Imagens
+![screencapture-localhost-3000-2021-05-15-19_41_06](https://user-images.githubusercontent.com/75874462/118380231-8bdb1c00-b5b6-11eb-8ca5-19118e0a4d0b.png)
+![screencapture-localhost-3000-2021-05-15-19_42_13](https://user-images.githubusercontent.com/75874462/118380233-8d0c4900-b5b6-11eb-8399-de8e2fbd29bd.png)
 
-![image](https://user-images.githubusercontent.com/48807462/118343702-c7b3aa00-b500-11eb-85dc-0e67ac254c48.png)
-![image](https://user-images.githubusercontent.com/48807462/118343708-d1d5a880-b500-11eb-8893-f59eeb0878aa.png)
 
 ## Link Surge
-upbeat-stage.surge.sh
+[LabeSatélites](http://labesatelites-grupo10.surge.sh/)
 
