@@ -24,7 +24,7 @@ export default function Header() {
   return (
     <div>
       <Cabecalho>
-        <h1>LabeShoes</h1>
+        <h1>LabeSatélites</h1>
         <div>
           <strong>Meu carrinho</strong>
           <Link to="/carrinho">

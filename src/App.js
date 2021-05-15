@@ -4,12 +4,12 @@ import Filtros from './components/Filtros/Filtros';
 import Carrinho from './components/Carrinho/Carrinho';
 import Produtos from './components/Produtos/Produtos'
 import GlobalStyles from './styles/global'
-import foto1 from './assets/image1.png'
-import foto2 from './assets/image2.png'
-import foto3 from './assets/image3.png'
-import foto4 from './assets/image4.png'
-import foto5 from './assets/image5.png'
-import foto6 from './assets/image6.png'
+import foto1 from './assets/satelite1.jpg'
+import foto2 from './assets/satelite2.jpg'
+import foto3 from './assets/satelite3.jpg'
+import foto4 from './assets/satelite4.jpg'
+import foto5 from './assets/satelite5.jpg'
+import foto6 from './assets/satelite6.jpg'
 import styled from 'styled-components'
 
 const ContainerAplicacao = styled.div`
@@ -22,38 +22,38 @@ const ContainerAplicacao = styled.div`
 const produtos = [
   {
     id: 1,
-    nome: "Tênis Nike Lebron Witness V",
-    preco: 180,
+    nome: "Sputnik",
+    preco: 18000,
     foto: foto1
   },
   {
     id: 2,
-    nome: "Tênis Nike Fly.By Mid 2",
-    preco: 275,
+    nome: "Telescópio Hubble",
+    preco: 27500,
     foto: foto2
   },
   {
     id: 3,
-    nome: "Tênis Nike Lebron Witness V Preto",
-    preco: 231,
+    nome: "Mariner 9",
+    preco: 23100,
     foto: foto3
   },
   {
     id: 4,
-    nome: "Tênis Air Jordan XXXV",
-    preco: 899,
+    nome: "Luna 10",
+    preco: 89900,
     foto: foto4
   },
   {
     id: 5,
-    nome: "Tênis Nike Fly.By Mid 2",
-    preco: 275,
+    nome: "Vostok 1",
+    preco: 27500,
     foto: foto5
   },
   {
     id: 6,
-    nome: "Tênis Nike Jordan React Elevation",
-    preco: 649,
+    nome: "Death Star",
+    preco: 649000,
     foto: foto6
   }
 ];
@@ -63,15 +63,7 @@ export default class App extends React.Component {
     minimo: 0,
     maximo: 0,
     buscaProduto: "",
-    produtosCarrinho: [
-      {
-        id: 3,
-        nome: 'Tênis Nike Lebron Witness V',
-        preco: 231,
-        foto: foto3,
-        qntdCompra: 3
-      }
-    ]
+    produtosCarrinho: []
   }
 
   componentDidMount() {
